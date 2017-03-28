@@ -4,7 +4,8 @@ var app = getApp()
 Page({
   data: {
     motto: 'Hello World',
-    userInfo: {}
+    userInfo: {},
+    newsItem: null
   },
   //事件处理函数
   bindViewTap: function() {
@@ -21,6 +22,12 @@ Page({
       that.setData({
         userInfo:userInfo
       })
-    })
+    });
+    wx.request({
+      url: 'https://hacker-news.firebaseio.com/v0/item/8863.json?print=pretty',
+      success: function (res) {
+        that.setData({ newsItem: res.data });
+      }
+    });
   }
 })
