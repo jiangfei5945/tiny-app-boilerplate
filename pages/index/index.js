@@ -5,28 +5,41 @@ Page({
   data: {
     motto: 'Hello World',
     userInfo: {},
-    newsItem: null
+    newsList: []
   },
   //事件处理函数
-  bindViewTap: function() {
+  bindViewTap: function () {
     wx.navigateTo({
       url: '../logs/logs'
     })
   },
   onLoad: function () {
-    console.log('onLoad')
     var that = this
     //调用应用实例的方法获取全局数据
-    app.getUserInfo(function(userInfo){
+      console.log(that.data);
+    app.getUserInfo(function (userInfo) {
       //更新数据
       that.setData({
-        userInfo:userInfo
+        userInfo: userInfo
       })
     });
+    var newsList = [];
     wx.request({
-      url: 'https://hacker-news.firebaseio.com/v0/item/8863.json?print=pretty',
+      url: 'https://hacker-news.firebaseio.com/v0/topstories.json?print=pretty',
       success: function (res) {
-        that.setData({ newsItem: res.data });
+        if (res.data && res.data.length) {
+          res.data.slice(0, 9).forEach(function (newsId) {
+            wx.request({
+              url: 'https://hacker-news.firebaseio.com/v0/item/' + newsId + '.json?print=pretty',
+              success: function (res) {
+                if (res.data) {
+                  newsList.push(res.data);
+                  that.setData({newsList:newsList});
+                }
+              }
+            });
+          });
+        }
       }
     });
   }
