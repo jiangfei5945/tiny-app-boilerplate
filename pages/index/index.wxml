@@ -6,8 +6,8 @@
   </view>
   <view class="usermotto">
     <text class="user-motto">{{motto}}</text>
-    <block wx:for="{{newsList}}" wx:for-item="news" wx:key="*this">
-      <text class="news-item">{{news.id}}: {{news.title}}</text>
-    </block>
+      <text wx:for="{{newsList}}" wx:for-item="news"              wx:key="*this" class="news-item">
+      {{news.id}}: {{news.title}}
+      </text>
   </view>
 </view>
