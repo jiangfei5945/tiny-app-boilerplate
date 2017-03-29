@@ -1,0 +1,16 @@
+{
+  "name": "tiny-app-boilerplate",
+  "version": "1.0.0",
+  "scripts": {
+    "test": ""
+  },
+  "author": "jiangfei5945 <jiangfei5945@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "es6-promise": "^4.1.0"
+  },
+  "devDependencies": {},
+  "engines": {
+    "node": ">=5.10"
+  }
+}
